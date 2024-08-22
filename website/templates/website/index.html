@@ -1,0 +1,57 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row text-center pb-4 text-uppercase">
+        <h2>OSRS-Mass</h2>
+    </div>
+</div>
+
+<div class="container text-center mb-5">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="" id="invite-code" placeholder="Invite Code" />
+                    <button type="submit" class="btn btn-success">Join Event</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div class="container mb-3">
+    <div class="row justify-content-center g-4">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <a href="" class="text-decoration-none">
+                    <img src="/media/osrs-player.jpg" class="card-img-top object-fill -xxl-contain border rounded" alt="Hollywood Sign on The Hill" />
+                    <div class="card-body">
+                        <h5 class="card-title border-bottom pb-3">Create A Mass Event</h5>
+                        <p class="card-text">
+                            Create your own Mass Event and invite your friends to join you.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <a href="" class="text-decoration-none">
+                    <img src="/media/osrs-calc.png" class="card-img-top object-fill -xxl-contain border rounded" alt="Hollywood Sign on The Hill" />
+                    <div class="card-body">
+                        <h5 class="card-title border-bottom pb-3">Calculators</h5>
+                        <p class="card-text">
+                            Custom calculators for Old School Runescape. Mostly made for ironmen.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
