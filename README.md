@@ -1,6 +1,18 @@
 # OSRS Mass
 A django based web application that allows users to create and join mass events in Old School Runescape.
 
+## Installation
+
+.env file should be created in the root directory with the following variables:
+```bash
+SECRET_KEY=yoursecretkey
+ALLOWED_HOSTS=*
+DEBUG=True
+TIME_ZONE=Europe/Helsinki
+```
+
+```bash
+
 ## Roadmap
 
 ### Website
