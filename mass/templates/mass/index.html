@@ -1,0 +1,40 @@
+{% extends "website/base.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mb-3">
+    <div class="row justify-content-center g-4">
+
+        {% if events %}
+        {% for event in events %}
+        <div class="col-md-3">
+            <div class="card h-100">
+                <h1 class="card-title text-center p-3">{{ event.name|upper }}</h1>
+                <img src="/media/osrs-player.jpg" class="card-img-top object-fill -xxl-contain border rounded" alt="Hollywood Sign on The Hill" />
+                <div class="card-body">
+
+                    <p class="card-text">{{ event.description }}</p>
+                    <p class="card-text">Start: {{ event.start_date|timeuntil }}</p>
+                    <p class="card-text">End: {{ event.end_date|timeuntil }}</p>
+                    <p class="card-text">Location: {{ event.location }}</p>
+                    <p class="card-text">Code: {{ event.invite_code }}</p>
+                    <div class="text-center">
+                        <p class="card-text">Requirements:</p>
+                        <p><span class="badge bg-success">{% trans "Yes" %}</span> Dragon Slayer</p>
+                        <p><span class="badge bg-success">{% trans "Yes" %}</span> Secrets of The North</p>
+                        <p><span class="badge bg-success">{% trans "Yes" %}</span> Cooks assistant</p>
+                        <a href="{% url 'mass:details' id=event.id %}">View details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h1 class="card-title text-center p-3">There are no events at the moment. 😢</h1>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

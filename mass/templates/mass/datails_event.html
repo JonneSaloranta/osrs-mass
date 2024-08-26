@@ -1,0 +1,24 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+<div class="container text-center">
+
+    {% if event %}
+    <h1 class="card-title text-center p-3">{{ event.name|upper }}</h1>
+    {# <img src="/media/osrs-player.jpg" class="card-img-top" height="100px" alt="Hollywood Sign on The Hill" /> #}
+    <div class="card-body">
+        <p class="card-text">{{ event.description }}</p>
+        <p class="card-text">Start: {{ event.start_date|timeuntil }}</p>
+        <p class="card-text">End: {{ event.end_date|timeuntil }}</p>
+        <p class="card-text">Location: {{ event.location }}</p>
+        <p class="card-text">Code: {{ event.invite_code }}</p>
+        <div class="text-center">
+            <p class="card-text">Requirements:</p>
+        </div>
+    </div>
+    {% else %}
+    <h1 class="card-title text-center p-3">There are no events at the moment. 😢</h1>
+    {% endif %}
+
+</div>
+{% endblock %}
