@@ -8,13 +8,14 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a href="{% url 'website:index' %}" class="nav-link fs-5">{% trans "Home" %}</a></li>
+                <li class="nav-item"><a href="{% url 'mass:index' %}" class="nav-link fs-5">{% trans "Events" %}</a></li>
                 {% if user.is_authenticated %}
                 {% if user.is_superuser %}
                 <li class="nav-item"><a href="/admin" class="nav-link fs-5">{% trans "Dashboard" %} <i class="bi bi-speedometer"></i></a></li>
                 {% endif %}
                 {% endif %}
                 {% if not user.is_authenticated %}
-                <li class="nav-item"><a href="{% url 'website:index' %}" class="nav-link fs-5">{% trans "Login" %}</a></li>
+                <li class="nav-item"><a href="/admin" class="nav-link fs-5">{% trans "Login" %}</a></li>
                 {% else %}
                 <li class="nav-item"><a href="{% url 'website:index' %}" class="nav-link fs-5">{% trans "Logout" %}</a></li>
                 {% endif %}
