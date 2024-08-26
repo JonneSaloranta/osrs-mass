@@ -3,9 +3,6 @@ from django.shortcuts import get_object_or_404
 
 from .models import Event
 
-
-from .models import Event
-
 def index(request):
     all_events = Event.objects.all()
 
