@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'website',
     'mass',
     'osrs_data',
+    'calculators',
 ]
 
 MIDDLEWARE = [
