@@ -1,0 +1,65 @@
+{% autoescape off %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #00336a;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Account Activation</h2>
+        <p>Hi <b>{{ user.name }} {{ user.lastname }}</b>,</p>
+        <p>Please click the button below to activate your account:</p>
+
+
+        <a href="http://{{ domain }}{% url 'activate_email' uidb64=uid token=token %}" class="button">Activate Account</a>
+
+        <p>If you didn't request this, you can ignore this email.</p>
+        <p>Thanks,</p>
+        <p>OSRS Events Team</p>
+        <p class="footer">&copy; 2024 Jonne Saloranta. All rights reserved.</p>
+    </div>
+</body>
+
+</html>
+
+{% endautoescape %}
