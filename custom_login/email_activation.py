@@ -10,6 +10,7 @@ from django.conf import settings
 from decouple import config
 from .tokens import account_activation_token
 from django.shortcuts import render, redirect
+from django.urls import reverse, reverse_lazy
 
 def activate(request, uidb64, token):
     user = get_user_model()
@@ -22,20 +23,20 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        messages.success(request, 'Your account has been confirmed.')
-        return redirect("/login")
+        messages.success(request, 'Your account has been activated.')
+        return redirect(reverse('auth:login'))
     else:
         messages.error(request, 'The confirmation link was invalid, possibly because it has already been used or expired. Please request a new confirmation link.')
 
-    return redirect("/login")
+    return redirect(reverse('auth:login'))
 
 def activateEmail(request, user, to_email):
     try:
         with get_connection(
-            host=settings.RESEND_SMTP_HOST,
-            port=settings.RESEND_SMTP_PORT,
-            username=settings.RESEND_SMTP_USERNAME,
-            password=config('RESEND_API_KEY'),  # or use settings.RESEND_API_KEY
+            host=config('RESEND_SMTP_HOST'),
+            port=config('RESEND_SMTP_PORT'),
+            username=config('RESEND_SMTP_USERNAME'),
+            password=config('RESEND_API_KEY'),
             
             use_tls=True,
         ) as connection:
@@ -46,7 +47,7 @@ def activateEmail(request, user, to_email):
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),  # Ensure this is correctly defined
+                'token': account_activation_token.make_token(user),
                 'email': to_email,
                 'protocol': 'https' if request.is_secure() else 'http',
             })
@@ -55,7 +56,7 @@ def activateEmail(request, user, to_email):
                 subject=subject,
                 body=message,
                 to=[to_email],
-                from_email=from_email,  # Changed from list to string
+                from_email=from_email,
                 connection=connection
             )
             email.content_subtype = 'html'
@@ -63,4 +64,4 @@ def activateEmail(request, user, to_email):
     except Exception as e:
         messages.error(request, 'Unable to send confirmation email. Please try again later.')
 
-    return redirect("/login")
+    return redirect(reverse('auth:login'))
