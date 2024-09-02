@@ -4,13 +4,40 @@ from django.utils import timezone
 
 from .models import Event, InviteUsage
 
-def index(request):
-    all_events = Event.objects.all()
+from django.shortcuts import render
+from django.db import OperationalError, connection
+from .models import Event  # Ensure the model is correctly imported
 
+def index(request):
+    try:
+        # Check if the 'mass_event' table exists in the database
+        if 'mass_event' in connection.introspection.table_names():
+            # If the table exists, retrieve all events
+            all_events = Event.objects.all()
+        else:
+            # If the table does not exist, handle the situation (e.g., return an empty list)
+            all_events = []
+            # Optionally, include a message in the context to inform the user
+            context = {
+                'events': all_events,
+                'error_message': "No events available. The database might not be set up yet."
+            }
+            return render(request, 'mass/index.html', context=context)
+    except OperationalError:
+        # Catch the OperationalError in case something goes wrong with the query
+        all_events = []
+        context = {
+            'events': all_events,
+            'error_message': "There was an issue accessing the events. Please check the database setup."
+        }
+        return render(request, 'mass/index.html', context=context)
+
+    # Normal context if everything is fine
     context = {
         'events': all_events
     }
     return render(request, 'mass/index.html', context=context)
+
 
 def create(request):
     return render(request, 'mass/create_event.html')
