@@ -28,7 +28,7 @@
                     </div>
                     <input class="btn btn-primary w-100 py-2" type="submit" value="{% trans 'Login' %}">
                 </form>
-
+                {# TODO: Add if statement for USE_EMAIL_ACTIVATION in .env. Hide if False, hide the activation link #}
                 <div class="container text-center py-3">
                     <p>{% trans "Need your account activated?"%}</p>
                     <a href="{% url 'auth:request_activation_email' %}">{% trans "Request activation"%}</a>
