@@ -1,0 +1,46 @@
+{% extends "website/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+{% trans "Login" %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container-sm">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <main class="form-signin m-auto">
+                <form action="{% url 'auth:login' %}" method="post">
+                    {% csrf_token %}
+                    <h1 class="h3 mb-3 fw-normal text-center">{% trans "Please login" %}</h1>
+
+                    <div class="form-floating my-2">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="email@example.com" required>
+                        <label for="email">{% trans "Email"%}</label>
+                    </div>
+
+                    <div class="form-floating my-2">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                        <label for="password">{% trans "Password" %}</label>
+                    </div>
+                    <input class="btn btn-primary w-100 py-2" type="submit" value="{% trans 'Login' %}">
+                </form>
+
+                <div class="container text-center py-3">
+                    <p>{% trans "Need your account activated?"%}</p>
+                    <a href="{% url 'auth:request_activation_email' %}">{% trans "Request activation"%}</a>
+                </div>
+
+                <div class="container text-center py-3">
+                    <p>{% trans "Need an account?" %}</p>
+                    <a href="{% url 'auth:register' %}">{% trans "Register here" %}</a>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
