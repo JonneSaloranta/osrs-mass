@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'db_control',
+    'email_login',
+    'custom_login',
     'website',
     'mass',
     'osrs_data',
@@ -149,3 +151,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Custom user model and login url
+AUTH_USER_MODEL = 'email_login.User'
+LOGIN_URL = '/login'
