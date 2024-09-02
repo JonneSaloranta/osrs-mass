@@ -2,8 +2,12 @@
 
 {% load static %}
 {% load i18n %}
+{% load event_filters %}
+
+
 
 {% block content %}
+
 <div class="container mb-3">
     <div class="row justify-content-center g-4">
 
@@ -11,21 +15,46 @@
         {% for event in events %}
         <div class="col-md-3">
             <div class="card h-100">
-                <h1 class="card-title text-center p-3">{{ event.name|upper }}</h1>
-                <img src="/media/osrs-player.jpg" class="card-img-top object-fill -xxl-contain border rounded" alt="Hollywood Sign on The Hill" />
+                <h3 class="card-title text-center p-3">{{ event.name|upper }}</h3>
+                <img src="{{event.get_event_image_url}}" class="card-img-top object-fill -xxl-contain border rounded" alt="Event image" />
                 <div class="card-body">
+                    <p class="card-text">{{ event.description|truncatewords:15 }}</p>
+                    {% if event.start_date|is_in_progress:event.end_date %}
+                    <p class="card-text text-warning fw-bold"><i class="bi bi-clock-fill"></i> In Progress!</p>
+                    {% else %}
+                    {% if event.start_date|starts_in_10_minutes %}
+                    <p class="card-text text-info fw-bold"><i class="bi bi-clock-fill"></i> Starting in &lt;10min!</p>
+                    {% else %}
+                    <p class="card-text text-success fw-bold"><i class="bi bi-clock-fill"></i> Until Starts: {{ event.start_date|timeuntil_or_ongoing }}</p>
+                    {% endif %}
+                    {% endif %}
 
-                    <p class="card-text">{{ event.description }}</p>
-                    <p class="card-text">Start: {{ event.start_date|timeuntil }}</p>
-                    <p class="card-text">End: {{ event.end_date|timeuntil }}</p>
-                    <p class="card-text">Location: {{ event.location }}</p>
+                    <p class="card-text"><i class="bi bi-hourglass-top"></i> Starts: {{ event.start_date|date:'H:i d-m-Y' }}</p>
+                    <p class="card-text"><i class="bi bi-hourglass-bottom"></i> Ends: {{ event.end_date|date:'H:i d-m-Y' }}</p>
+                    <p class="card-text"><i class="bi bi-geo-alt-fill"></i> Location: {{ event.location }}</p>
                     <p class="card-text">Code: {{ event.invite_code }}</p>
+
                     <div class="text-center">
                         <p class="card-text">Requirements:</p>
-                        <p><span class="badge bg-success">{% trans "Yes" %}</span> Dragon Slayer</p>
-                        <p><span class="badge bg-success">{% trans "Yes" %}</span> Secrets of The North</p>
-                        <p><span class="badge bg-success">{% trans "Yes" %}</span> Cooks assistant</p>
+                        {% if event.requirements.all %}
+                        {% for requirement in event.requirements.all %}
+                        <p><span class="badge bg-success">{% trans "Yes" %}</span>
+                            {% if requirement.wiki_url %}
+                            <a href="{{ requirement.wiki_url }}" target="_blank">{{requirement}}</a>
+                            {% else %}
+                            {{requirement}}
+                            {% endif %}
+                        </p>
+                        {% if requirement.sub_requirements.all %}
+                        {% for sub_requirement in requirement.sub_requirements.all %}
+                        <p><span class="badge bg-success">{% trans "Yes" %}</span> {{sub_requirement}}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
                         <a href="{% url 'mass:details' id=event.id %}">View details</a>
+                        {% else %}
+                        <p><span class="badge bg-success">{% trans "Yes" %}</span> No requirements</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
