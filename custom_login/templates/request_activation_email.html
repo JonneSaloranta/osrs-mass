@@ -1,0 +1,16 @@
+{% extends "website/base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}Request activation{% endblock %}
+
+
+{% block content %}
+<div class="container text-center">
+    <h2>{% trans 'Request account activation' %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary py-2" type="submit" value="{% trans 'Send request'%}">
+    </form>
+</div>
+{% endblock %}
