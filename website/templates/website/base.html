@@ -24,12 +24,6 @@
 <body data-bs-theme="dark">
     {% include "website/navbar.html" %}
 
-    {% if breadcrumbs %}
-    <div class="container">
-        {% include "dynamic_breadcrumbs/breadcrumbs.html" with breadcrumbs=breadcrumbs%}
-    </div>
-    {% endif %}
-
     {% block content %}
 
     {% endblock %}
