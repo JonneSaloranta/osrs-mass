@@ -1,13 +1,15 @@
 # Custom Django
 staticfiles/
+migrations/
+*.sqlite3
+media
 
 # Django #
 *.log
 *.pot
 *.pyc
 __pycache__
-*.sqlite3
-media
+
 
 # Backup files # 
 *.bak 
