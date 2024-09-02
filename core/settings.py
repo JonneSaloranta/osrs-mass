@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'db_control',
+    # 'db_control',
     'email_login',
     'custom_login',
     'website',
@@ -81,21 +81,21 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASE_ROUTERS = ['db_control.EventRouter.EventRouter', 'db_control.RequirementsRouter.RequirementsRouter']
+# DATABASE_ROUTERS = ['db_control.EventRouter.EventRouter', 'db_control.RequirementsRouter.RequirementsRouter']
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'event-db': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'event-db.sqlite3',
-    },
-    'requirements-db': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'requirements-db.sqlite3',
-    }
+    # 'event-db': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'event-db.sqlite3',
+    # },
+    # 'requirements-db': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'requirements-db.sqlite3',
+    # }
 }
 
 
