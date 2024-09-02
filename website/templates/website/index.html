@@ -8,18 +8,18 @@
 </div>
 
 <div class="container text-center mb-5">
-    <form action="" method="post">
-        {% csrf_token %}
+    <form action="{% url 'mass:join' %}" method="GET">
         <div class="row justify-content-center">
             <div class="col-auto">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="" id="invite-code" placeholder="Invite Code" />
+                    <input type="text" class="form-control" name="invite_code" id="invite-code" placeholder="Invite Code" />
                     <button type="submit" class="btn btn-success">Join Event</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
 
 
 <div class="container mb-3">
