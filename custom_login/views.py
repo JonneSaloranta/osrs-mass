@@ -12,10 +12,11 @@ from .tokens import account_activation_token
 from django.core.mail import EmailMessage, get_connection
 from decouple import config
 from custom_login.email_activation import activateEmail, activate
+from django.urls import reverse, reverse_lazy
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect("/")
+        return redirect(reverse('mass:index'))
     next = request.GET.get('next')
     form = UserLoginForm(request.POST or None)
     if form.is_valid():
@@ -29,7 +30,7 @@ def login_view(request):
                 login(request, user)
                 if next:
                     return redirect(next)
-                return redirect("/")
+                return redirect("mass:index")
             else:
                 messages.error(request, 'Your account is not active. Please check your email for activation instructions.')
         else:
@@ -42,7 +43,7 @@ def login_view(request):
 
 def register_view(request):
     if request.user.is_authenticated:
-        return redirect("/")
+        return redirect("mass:index")
     next = request.GET.get('next')
     form = UserRegisterForm(request.POST or None)
     
@@ -50,9 +51,8 @@ def register_view(request):
         user = form.save(commit=False)
         password = form.cleaned_data.get("password")
         user.set_password(password)
-        resend_api_key = settings.RESEND_API_KEY
-
-        if resend_api_key:
+        resend_api_key = config('RESEND_API_KEY')
+        if resend_api_key and config('USE_EMAIL_ACTIVATION', default=False, cast=bool):
             user.is_active = False
             user.save()
             activateEmail(request, user, form.cleaned_data.get("email"))
@@ -64,11 +64,11 @@ def register_view(request):
             messages.success(request, 'Your account has been created.')
             if next:
                 return redirect(next)
-            return redirect("/")
+            return redirect("mass:index")
         
         if next:
             return redirect(next)
-        return redirect("/")
+        return redirect("mass:index")
     
     context = {
         'form': form,
@@ -78,7 +78,7 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     messages.success(request, 'You have been successfully logged out.')
-    return redirect("/")
+    return redirect("mass:index")
 
 def request_activation_email(request):
     if request.method == 'POST':
@@ -92,7 +92,7 @@ def request_activation_email(request):
                 messages.success(request, "Activation email will be sent if the email is associated with an existing account.")
             except user_model.DoesNotExist:
                 messages.success(request, "Activation email will be sent if the email is associated with an existing account.")
-            return redirect('request_activation_email')
+            return redirect('auth:request_activation_email')
     else:
         form = RequestActivationEmailForm()
 
