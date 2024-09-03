@@ -1,0 +1,58 @@
+{% extends "website/base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}Register{% endblock %}
+
+
+{% block content %}
+
+<div class="container-sm">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <main class="form-signin m-auto">
+                <form action="{%url 'auth:register' %}" method="post">
+                    {% csrf_token %}
+                    <h1 class="h3 mb-3 fw-normal text-center">{%trans 'Sign up' %}</h1>
+
+                    <div class="form-floating my-2">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Firstname" required>
+                        <label for="name">{%trans 'Firstname' %}</label>
+                    </div>
+
+                    <div class="form-floating my-2">
+                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Lastname" required>
+                        <label for="lastname">{%trans 'Lastname' %}</label>
+                    </div>
+
+                    <div class="form-floating my-2">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                        <label for="email">{%trans 'Email' %}</label>
+                    </div>
+
+                    <div class="form-floating my-2">
+                        <input type="email" class="form-control" name="email2" id="email2" placeholder="name@example.com" required>
+                        <label for="email2">{%trans 'Repeat Email' %}</label>
+                    </div>
+
+                    <div class="form-floating my-2">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                        <label for="password">{%trans 'Password' %}</label>
+                    </div>
+
+                    <div class="form-floating my-2">
+                        <input type="password" class="form-control" name="password2" id="password2" placeholder="Password" required>
+                        <label for="password2">{%trans 'Repeat Password' %}</label>
+                    </div>
+
+                    <input class="btn btn-primary w-100 py-2" type="submit" value="{% trans 'Register' %}">
+                </form>
+
+                <div class="container text-center py-3">
+                    <p>{%trans 'Already have an account?' %}</p>
+                    <a href="{%url 'auth:login' %}">{%trans 'Login' %}</a>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+{% endblock %}
