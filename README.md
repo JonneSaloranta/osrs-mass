@@ -1,5 +1,7 @@
 # OSRS Mass
 
+[![Django CI](https://github.com/JonneSaloranta/osrs-mass/actions/workflows/django.yml/badge.svg)](https://github.com/JonneSaloranta/osrs-mass/actions/workflows/django.yml)
+
 A django based web application that allows users to create and join mass events in Old School Runescape.
 
 ## Installation
