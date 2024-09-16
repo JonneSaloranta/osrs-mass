@@ -8,6 +8,9 @@ on:
 
 env:
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+  DEBUG: ${{ secrets.DEBUG }}
+  TIME_ZONE: ${{ secrets.TIME_ZONE }}
 
 jobs:
   build:
