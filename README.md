@@ -11,6 +11,14 @@ SECRET_KEY=yoursecretkey
 ALLOWED_HOSTS=*
 DEBUG=True
 TIME_ZONE=Europe/Helsinki
+
+USE_EMAIL_ACTIVATION=False
+RESEND_API_KEY=your_resend_api_key
+RESEND_SMTP_HOST=resend_host
+RESEND_SMTP_USERNAME=resend_username
+RESEND_SMTP_PORT=resend_port
+RESEND_FROM_EMAIL='your@email.com'
+
 ```
 
 ## Roadmap
