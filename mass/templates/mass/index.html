@@ -2,7 +2,7 @@
 
 {% load static %}
 {% load i18n %}
-{% load event_filters %}
+{% load event_filters%}
 
 
 
@@ -51,7 +51,7 @@
                         {% endfor %}
                         {% endif %}
                         {% endfor %}
-                        <a href="{% url 'mass:details' id=event.id %}">View details</a>
+                        <a href="{% url 'mass:details' uuid=event.uuid %}">View details</a>
                         {% else %}
                         <p><span class="badge bg-success">{% trans "Yes" %}</span> No requirements</p>
                         {% endif %}

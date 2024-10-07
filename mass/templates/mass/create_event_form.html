@@ -1,0 +1,64 @@
+<div class="container mt-4">
+    <h2>Create Event</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="mb-3">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.location.label_tag }}
+            {{ form.location }}
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {{ form.start_date.label_tag }}
+                {{ form.start_date }}
+            </div>
+            <div class="col">
+                {{ form.start_time.label_tag }}
+                {{ form.start_time }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {{ form.end_date.label_tag }}
+                {{ form.end_date }}
+            </div>
+            <div class="col">
+                {{ form.end_time.label_tag }}
+                {{ form.end_time }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.requirements.label_tag }}
+            {{ form.requirements }}
+            <button type="button" id="clear-requirements" class="btn btn-secondary btn-sm mt-2">Clear Requirements</button>
+        </div>
+
+        <div class="mb-3">
+            {{ form.event_image.label_tag }}
+            {{ form.event_image }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Event</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('clear-requirements').addEventListener('click', function () {
+        const checkboxes = document.querySelectorAll('input[name="requirements"]');
+        checkboxes.forEach(checkbox => checkbox.checked = false);
+    });
+</script>

@@ -20,6 +20,7 @@
             <h1 class="card-title text-center p-3">{{ event.name|upper }}</h1>
             <img src="{{ event.get_event_image_url}}" class="cover-image" />
             <div class="card-body">
+                <p class="card-text">Creator: {{ nickname }}</p>
                 <p class="card-text">{{ event.description }}</p>
                 <p class="card-text">Start: {{ event.start_date|timeuntil }}</p>
                 <p class="card-text">End: {{ event.end_date|timeuntil }}</p>
