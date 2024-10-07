@@ -10,10 +10,15 @@
                 <li class="nav-item"><a href="{% url 'website:index' %}" class="nav-link fs-5">{% trans "Home" %}</a></li>
                 <li class="nav-item"><a href="{% url 'mass:index' %}" class="nav-link fs-5">{% trans "Events" %}</a></li>
                 {% if user.is_authenticated %}
+
+                <li class="nav-item"><a href="{% url 'website:user_profile' user_id=user.id %}" class="nav-link fs-5">{% trans "Profile" %}</a></li>
+
                 {% if user.is_superuser %}
                 <li class="nav-item"><a href="{% url 'admin:index' %}" class="nav-link fs-5">{% trans "Dashboard" %} <i class="bi bi-speedometer"></i></a></li>
                 {% endif %}
                 {% endif %}
+
+
                 {% if not user.is_authenticated %}
                 <li class="nav-item"><a href="{% url 'auth:login' %}" class="nav-link fs-5">{% trans "Login" %}</a></li>
                 {% else %}
