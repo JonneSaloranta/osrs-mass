@@ -5,6 +5,7 @@ from datetime import timedelta
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
+from email_login.models import User
 
 class InviteUsage(models.Model):
     invite_code = models.CharField(max_length=6)
@@ -39,6 +40,7 @@ class Requirement(models.Model):
         return f"{self.name} ({self.get_type_display()})"
 
 class Event(models.Model):
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1000)
     start_date = models.DateTimeField()

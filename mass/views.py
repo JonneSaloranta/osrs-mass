@@ -3,44 +3,39 @@ from django.http import HttpResponse
 from django.utils import timezone
 
 from .models import Event, InviteUsage
+from .forms import EventForm
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render
 from django.db import OperationalError, connection
-from .models import Event  # Ensure the model is correctly imported
+from .models import Event
+from website.models import UserNickname
 
 def index(request):
     try:
-        # Check if the 'mass_event' table exists in the database
-        if 'mass_event' in connection.introspection.table_names():
-            # If the table exists, retrieve all events
-            all_events = Event.objects.all()
-        else:
-            # If the table does not exist, handle the situation (e.g., return an empty list)
-            all_events = []
-            # Optionally, include a message in the context to inform the user
-            context = {
-                'events': all_events,
-                'error_message': "No events available. The database might not be set up yet."
-            }
-            return render(request, 'mass/index.html', context=context)
+        all_events = Event.objects.all()
     except OperationalError:
-        # Catch the OperationalError in case something goes wrong with the query
-        all_events = []
-        context = {
-            'events': all_events,
-            'error_message': "There was an issue accessing the events. Please check the database setup."
-        }
-        return render(request, 'mass/index.html', context=context)
+        all_events = []    
 
-    # Normal context if everything is fine
     context = {
         'events': all_events
     }
     return render(request, 'mass/index.html', context=context)
 
-
-def create(request):
-    return render(request, 'mass/create_event.html')
+@login_required
+def create_event(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.creator = request.user
+            event.save()
+            form.save_m2m()
+            return redirect('mass:details', uuid=event.uuid)
+    else:
+        form = EventForm()
+    return render(request, 'mass/create_event.html', {'form': form})
 
 def update(request):
     return render(request, 'mass/update_event.html')
@@ -93,10 +88,20 @@ def join(request):
 def leave(request):
     return render(request, 'mass/index.html')
 
-def details(request, id):
-    event = get_object_or_404(Event, pk=id)
+def details(request, uuid):
+    event = get_object_or_404(Event, uuid=uuid)
+    user = event.creator
+    try:
+        nickname = UserNickname.objects.get(user=user).nickname
+    except UserNickname.DoesNotExist:
+        nickname = UserNickname.random_nickname_generator()
+        UserNickname.objects.create(user=user, nickname=nickname)
+        user_nickname = UserNickname.objects.get(user=user)
+        user_nickname.nickname = nickname
+        user_nickname.save()
     context = {
-        'event': event
+        'event': event,
+        'nickname': nickname,
     }
     return render(request, 'mass/details_event.html' , context=context)
 
