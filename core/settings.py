@@ -28,6 +28,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
+INTERNARL_IPS = config('INTERNAL_IPS', cast=lambda v: [s.strip() for s in v.split(',')])
 
 # Application definition
 
