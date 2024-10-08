@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-08 21:27+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\core\settings.py:135
+msgid "English"
+msgstr ""
+
+#: .\core\settings.py:136
+msgid "Finnish"
+msgstr ""
+
+#: .\core\settings.py:137
+msgid "Swedish"
+msgstr ""
+
+#: .\core\settings.py:138
+msgid "Russian"
+msgstr ""
+
+#: .\custom_login\templates\login.html:6 .\custom_login\templates\login.html:29
+#: .\custom_login\templates\register.html:52
+#: .\website\templates\website\navbar.html:23
+msgid "Login"
+msgstr ""
+
+#: .\custom_login\templates\login.html:18
+msgid "Please login"
+msgstr ""
+
+#: .\custom_login\templates\login.html:22
+#: .\custom_login\templates\register.html:29
+msgid "Email"
+msgstr ""
+
+#: .\custom_login\templates\login.html:27
+#: .\custom_login\templates\register.html:39
+msgid "Password"
+msgstr ""
+
+#: .\custom_login\templates\login.html:34
+msgid "Need your account activated?"
+msgstr ""
+
+#: .\custom_login\templates\login.html:35
+msgid "Request activation"
+msgstr ""
+
+#: .\custom_login\templates\login.html:40
+msgid "Need an account?"
+msgstr ""
+
+#: .\custom_login\templates\login.html:41
+msgid "Register here"
+msgstr ""
+
+#: .\custom_login\templates\register.html:15
+msgid "Sign up"
+msgstr ""
+
+#: .\custom_login\templates\register.html:19
+msgid "Firstname"
+msgstr ""
+
+#: .\custom_login\templates\register.html:24
+msgid "Lastname"
+msgstr ""
+
+#: .\custom_login\templates\register.html:34
+msgid "Repeat Email"
+msgstr ""
+
+#: .\custom_login\templates\register.html:44
+msgid "Repeat Password"
+msgstr ""
+
+#: .\custom_login\templates\register.html:47
+msgid "Register"
+msgstr ""
+
+#: .\custom_login\templates\register.html:51
+msgid "Already have an account?"
+msgstr ""
+
+#: .\custom_login\templates\request_activation_email.html:9
+msgid "Request account activation"
+msgstr ""
+
+#: .\custom_login\templates\request_activation_email.html:13
+msgid "Send request"
+msgstr ""
+
+#: .\mass\templates\mass\create_event_form.html:50
+msgid "Clear Requirements"
+msgstr ""
+
+#: .\mass\templates\mass\create_event_form.html:58
+msgid "Save Event"
+msgstr ""
+
+#: .\mass\templates\mass\details_event.html:32
+#: .\mass\templates\mass\details_event.html:41
+#: .\mass\templates\mass\index.html:42 .\mass\templates\mass\index.html:51
+#: .\mass\templates\mass\index.html:57
+#: .\website\templates\website\user_events.html:30
+#: .\website\templates\website\user_events.html:39
+#: .\website\templates\website\user_events.html:45
+#: .\website\templates\website\user_profile.html:44
+#: .\website\templates\website\user_profile.html:53
+#: .\website\templates\website\user_profile.html:59
+msgid "Yes"
+msgstr ""
+
+#: .\website\templates\website\navbar.html:4
+msgid "OSRS-MASS"
+msgstr ""
+
+#: .\website\templates\website\navbar.html:5
+msgid "Toggle navigation"
+msgstr ""
+
+#: .\website\templates\website\navbar.html:10
+msgid "Home"
+msgstr ""
+
+#: .\website\templates\website\navbar.html:11
+msgid "Events"
+msgstr ""
+
+#: .\website\templates\website\navbar.html:14
+msgid "Profile"
+msgstr ""
+
+#: .\website\templates\website\navbar.html:17
+msgid "Dashboard"
+msgstr ""
+
+#: .\website\templates\website\navbar.html:25
+msgid "Logout"
+msgstr ""
+
+#: .\website\templatetags\event_filters.py:12
+msgid "on going"
+msgstr ""
