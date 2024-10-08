@@ -1,3 +1,6 @@
+{% load static %}
+{% load i18n %}
+
 <div class="container mt-4">
     <h2>Create Event</h2>
     <form method="POST" enctype="multipart/form-data">
@@ -44,7 +47,7 @@
         <div class="mb-3">
             {{ form.requirements.label_tag }}
             {{ form.requirements }}
-            <button type="button" id="clear-requirements" class="btn btn-secondary btn-sm mt-2">Clear Requirements</button>
+            <button type="button" id="clear-requirements" class="btn btn-secondary btn-sm mt-2">{% trans 'Clear Requirements' %}</button>
         </div>
 
         <div class="mb-3">
@@ -52,7 +55,7 @@
             {{ form.event_image }}
         </div>
 
-        <button type="submit" class="btn btn-primary">Save Event</button>
+        <button type="submit" class="btn btn-primary">{% trans 'Save Event' %}</button>
     </form>
 </div>
 

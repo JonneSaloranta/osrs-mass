@@ -19,13 +19,14 @@
                 <img src="{{event.get_event_image_url}}" class="card-img-top object-fill -xxl-contain border rounded" alt="Event image" />
                 <div class="card-body">
                     <p class="card-text">{{ event.description|truncatewords:15 }}</p>
+                    <p>{{event.start_date|is_in_progress:event.end_date}}</p>
                     {% if event.start_date|is_in_progress:event.end_date %}
                     <p class="card-text text-warning fw-bold"><i class="bi bi-clock-fill"></i> In Progress!</p>
                     {% else %}
                     {% if event.start_date|starts_in_10_minutes %}
                     <p class="card-text text-info fw-bold"><i class="bi bi-clock-fill"></i> Starting in &lt;10min!</p>
                     {% else %}
-                    <p class="card-text text-success fw-bold"><i class="bi bi-clock-fill"></i> Until Starts: {{ event.start_date|timeuntil_or_ongoing }}</p>
+                    <p class="card-text text-primary fw-bold"><i class="bi bi-clock-fill"></i> Until Starts: {{ event.start_date|timeuntil_start }}</p>
                     {% endif %}
                     {% endif %}
 

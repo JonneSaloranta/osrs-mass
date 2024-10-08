@@ -1,22 +1,19 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.db import OperationalError
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
-from .models import Event, InviteUsage
-from .forms import EventForm
-from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
-
-from django.shortcuts import render
-from django.db import OperationalError, connection
-from .models import Event
 from website.models import UserNickname
+
+from .forms import EventForm
+from .models import Event, InviteUsage
+
 
 def index(request):
     try:
         all_events = Event.objects.all()
     except OperationalError:
-        all_events = []    
+        all_events = []
 
     context = {
         'events': all_events
@@ -42,8 +39,6 @@ def update(request):
 
 def delete(request):
     return render(request, 'mass/index.html')
-
-from django.shortcuts import render
 
 def join(request):
     invite_code = request.GET.get('invite_code')
