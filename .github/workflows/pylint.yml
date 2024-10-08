@@ -25,4 +25,5 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py')
+        pylint $(git ls-files '*.py') > pylint_output.txt || true
+        if grep -q "warning" pylint_output.txt; then exit 1; fi
