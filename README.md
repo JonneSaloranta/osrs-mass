@@ -1,8 +1,9 @@
 # OSRS Mass
 
 [![Django CI](https://github.com/JonneSaloranta/osrs-mass/actions/workflows/django.yml/badge.svg)](https://github.com/JonneSaloranta/osrs-mass/actions/workflows/django.yml)
+[![Pylint](https://github.com/JonneSaloranta/osrs-mass/actions/workflows/pylint.yml/badge.svg)](https://github.com/JonneSaloranta/osrs-mass/actions/workflows/pylint.yml)
 
-A django based web application that allows users to create and join mass events in Old School Runescape.
+A Django based web application that allows users to create and join mass events in Old School Runescape.
 
 ## Installation
 
