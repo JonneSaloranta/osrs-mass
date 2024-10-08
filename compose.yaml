@@ -1,0 +1,50 @@
+services:
+  server:
+    build:
+      context: .
+    restart: unless-stopped
+    command: python manage.py runserver 0.0.0.0:8000 # Only running the server here
+    ports:
+      - 8000:8000
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      TIME_ZONE: ${TIME_ZONE}
+      DEBUG: ${DEBUG}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      INTERNAL_IPS: ${INTERNAL_IPS}
+    volumes:
+      - django-data:/srv/app
+    depends_on:
+      - migrate
+      - collectstatic
+
+  # Separate service for handling static files collection
+  collectstatic:
+    build:
+      context: .
+    command: python manage.py collectstatic --noinput
+    volumes:
+      - django-data:/srv/app
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      TIME_ZONE: ${TIME_ZONE}
+      DEBUG: ${DEBUG}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      INTERNAL_IPS: ${INTERNAL_IPS}
+
+  # Separate service for handling migrations
+  migrate:
+    build:
+      context: .
+    command: python manage.py makemigrations && python manage.py migrate
+    volumes:
+      - django-data:/srv/app
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      TIME_ZONE: ${TIME_ZONE}
+      DEBUG: ${DEBUG}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      INTERNAL_IPS: ${INTERNAL_IPS}
+
+volumes:
+  django-data:
