@@ -26,4 +26,4 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py') > pylint_output.txt || true
-        if grep -q "warning" pylint_output.txt; then exit 1; fi
+        if grep -q -e "warning" -e "error" pylint_output.txt; then exit 1; fi
