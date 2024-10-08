@@ -11,6 +11,7 @@ env:
   ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
   DEBUG: ${{ secrets.DEBUG }}
   TIME_ZONE: ${{ secrets.TIME_ZONE }}
+  INTERNAL_IPS: ${{ secrets.INTERNAL_IPS }}
 
 jobs:
   build:
