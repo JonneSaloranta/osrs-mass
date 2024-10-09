@@ -76,10 +76,11 @@ class Event(models.Model):
     def get_absolute_url(self):
         return f'/details/{self.uuid}'
 
+    @property
     def get_event_image_url(self):
         if self.event_image:
             return self.event_image.url
-        return 'https://via.placeholder.com/150'
+        return 'https://placehold.co/600x400?text=No%20\nImage'
 
     def generate_invite_code(self):
         import random
