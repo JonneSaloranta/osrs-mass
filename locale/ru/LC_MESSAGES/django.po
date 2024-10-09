@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-08 21:27+0300\n"
+"POT-Creation-Date: 2024-10-09 03:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,25 +19,25 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: .\core\settings.py:135
+
+#: .\core\settings.py:133
 msgid "English"
 msgstr ""
 
-#: .\core\settings.py:136
+#: .\core\settings.py:134
 msgid "Finnish"
 msgstr ""
 
-#: .\core\settings.py:137
+#: .\core\settings.py:135
 msgid "Swedish"
 msgstr ""
 
-#: .\core\settings.py:138
+#: .\core\settings.py:136
 msgid "Russian"
 msgstr ""
 
 #: .\custom_login\templates\login.html:6 .\custom_login\templates\login.html:29
-#: .\custom_login\templates\register.html:52
-#: .\website\templates\website\navbar.html:23
+#: .\custom_login\templates\register.html:52 .\templates\website\navbar.html:23
 msgid "Login"
 msgstr ""
 
@@ -107,52 +107,53 @@ msgstr ""
 msgid "Send request"
 msgstr ""
 
-#: .\mass\templates\mass\create_event_form.html:50
+#: .\templates\mass\container_events_small.html:7
+msgid "Your events"
+msgstr ""
+
+#: .\templates\mass\create_event_form.html:50
 msgid "Clear Requirements"
 msgstr ""
 
-#: .\mass\templates\mass\create_event_form.html:58
+#: .\templates\mass\create_event_form.html:58
 msgid "Save Event"
 msgstr ""
 
-#: .\mass\templates\mass\details_event.html:32
-#: .\mass\templates\mass\details_event.html:41
-#: .\mass\templates\mass\index.html:42 .\mass\templates\mass\index.html:51
-#: .\mass\templates\mass\index.html:57
-#: .\website\templates\website\user_events.html:30
-#: .\website\templates\website\user_events.html:39
-#: .\website\templates\website\user_events.html:45
-#: .\website\templates\website\user_profile.html:44
-#: .\website\templates\website\user_profile.html:53
-#: .\website\templates\website\user_profile.html:59
+#: .\templates\mass\details_event.html:32
+#: .\templates\mass\details_event.html:41 .\templates\mass\index.html:45
+#: .\templates\mass\index.html:54 .\templates\mass\temp.html:30
+#: .\templates\mass\temp.html:39 .\templates\mass\temp.html:45
+#: .\templates\website\user_events.html:31
+#: .\templates\website\user_events.html:40
+#: .\templates\website\user_events.html:46
 msgid "Yes"
 msgstr ""
 
-#: .\website\templates\website\navbar.html:4
+#: .\templates\website\navbar.html:4
 msgid "OSRS-MASS"
 msgstr ""
 
-#: .\website\templates\website\navbar.html:5
+#: .\templates\website\navbar.html:5
 msgid "Toggle navigation"
 msgstr ""
 
-#: .\website\templates\website\navbar.html:10
+#: .\templates\website\navbar.html:10
 msgid "Home"
 msgstr ""
 
-#: .\website\templates\website\navbar.html:11
+#: .\templates\website\navbar.html:11
 msgid "Events"
 msgstr ""
 
-#: .\website\templates\website\navbar.html:14
+#: .\templates\website\navbar.html:14
 msgid "Profile"
 msgstr ""
 
-#: .\website\templates\website\navbar.html:17
+#: .\templates\website\navbar.html:17
 msgid "Dashboard"
 msgstr ""
 
-#: .\website\templates\website\navbar.html:25
+#: .\templates\website\navbar.html:25
 msgid "Logout"
 msgstr ""
 
