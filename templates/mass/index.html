@@ -1,0 +1,72 @@
+{% extends "website/base.html" %}
+
+{% load static %}
+{% load i18n %}
+{% load event_filters%}
+
+
+
+{% block content %}
+
+<div class="container mb-3">
+    <div class="row justify-content-center g-4">
+
+        {% if events_with_nicknames %}
+        {% for event_data in events_with_nicknames %}
+        <div class="col-md-3">
+            <div class="card h-100">
+                <h3 class="card-title text-center p-3">{{ event_data.event.name|upper }}</h3>
+                <img src="{{ event_data.event.get_event_image_url }}" class="card-img-top object-fill -xxl-contain border rounded" alt="Event image" />
+                <div class="card-body">
+
+                    <!-- Show the user's nickname or username -->
+                    <small class="text-muted">By: {{ event_data.nickname }}</small>
+
+                    <p class="card-text">{{ event_data.event.description|truncatewords:15 }}</p>
+                    {% if event_data.event.start_date|is_in_progress:event_data.event.end_date %}
+                    <p class="card-text text-warning fw-bold"><i class="bi bi-clock-fill"></i> In Progress!</p>
+                    {% else %}
+                    {% if event_data.event.start_date|starts_in_10_minutes %}
+                    <p class="card-text text-info fw-bold"><i class="bi bi-clock-fill"></i> Starting in &lt;10min!</p>
+                    {% else %}
+                    <p class="card-text text-primary fw-bold"><i class="bi bi-clock-fill"></i> Until Starts: {{ event_data.event.start_date|timeuntil_start }}</p>
+                    {% endif %}
+                    {% endif %}
+
+                    <p class="card-text"><i class="bi bi-hourglass-top"></i> Starts: {{ event_data.event.start_date|date:'H:i d-m-Y' }}</p>
+                    <p class="card-text"><i class="bi bi-hourglass-bottom"></i> Ends: {{ event_data.event.end_date|date:'H:i d-m-Y' }}</p>
+                    <p class="card-text"><i class="bi bi-geo-alt-fill"></i> Location: {{ event_data.event.location }}</p>
+                    <p class="card-text">Code: {{ event_data.event.invite_code }}</p>
+
+                    <div class="text-center">
+                        {% if event_data.event.requirements.all %}
+                        <p class="card-text">Requirements:</p>
+                        {% for requirement in event_data.event.requirements.all %}
+                        <p><span class="badge bg-success">{% trans "Yes" %}</span>
+                            {% if requirement.wiki_url %}
+                            <a href="{{ requirement.wiki_url }}" target="_blank">{{requirement}}</a>
+                            {% else %}
+                            {{requirement}}
+                            {% endif %}
+                        </p>
+                        {% if requirement.sub_requirements.all %}
+                        {% for sub_requirement in requirement.sub_requirements.all %}
+                        <p><span class="badge bg-success">{% trans "Yes" %}</span> {{sub_requirement}}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        <a href="{% url 'mass:details' uuid=event_data.event.uuid %}">View details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h1 class="card-title text-center p-3">There are no events at the moment. 😢</h1>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

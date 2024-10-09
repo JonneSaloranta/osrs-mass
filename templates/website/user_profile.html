@@ -1,0 +1,58 @@
+{% extends "website/base.html" %}
+
+{% load static %}
+{% load i18n %}
+{% load event_filters %}
+
+{% block title %}User Profile{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row text-center pb-4 text-uppercase">
+        <h2>OSRS-Mass</h2>
+    </div>
+</div>
+
+{% include "mass/container_events_small.html" %}
+
+<div class="container mb-3">
+    <div class="row justify-content-center g-4 mb-3">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Account details</h5>
+                    <p class="card-text">Email: {{ user.email }}</p>
+                    <p class="card-text">Name: {{ user.name }} {{ user.lastname }}</p>
+                    <p class="card-text">Nickname: {{ nickname }}</p>
+                    <form action="{% url 'website:change_nickname' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="nickname" placeholder="{{ nickname }}" id="nickname" />
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-auto">Change Nickname</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Change Password</h5>
+                    <form action="#" method="POST" class="d-flex flex-column h-100">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="password" class="form-control" name="old_password" placeholder="Old Password" id="old-password" />
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" name="new_password1" placeholder="New Password" id="new-password" />
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" name="new_password2" placeholder="Confirm New Password" id="confirm-new-password" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

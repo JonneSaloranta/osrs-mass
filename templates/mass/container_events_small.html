@@ -1,0 +1,47 @@
+{% load static %}
+{% load i18n %}
+
+<div class="container">
+    <div class="row text-center pb-4">
+        {% if events %}
+        <h2>{% trans 'Your events' %}</h2>
+        {% for event in events %}
+
+
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{event.get_event_image_url}}" class="card-img-top object-fill -xxl-contain border rounded" alt="Event image" />
+                <div class="card-body">
+                    <h5 class="card-title">{{event.name}}</h5>
+                    <p class="card-text">{{event.description|truncatewords:15}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted"><i class="bi bi-hourglass-top"></i> Starts: {{ event.start_date|date:'H:i d-m-Y' }}</small>
+                    <small class="text-muted"><i class="bi bi-hourglass-bottom"></i> Ends: {{ event.end_date|date:'H:i d-m-Y' }}</small>
+                    <small class="text-muted"><i class="bi bi-geo-alt-fill"></i> Location: {{ event.location }}</small>
+                    <small class="text-muted">Code: {{ event.invite_code }}</small>
+                </div>
+            </div>
+        </div>
+
+
+
+        {% endfor %}
+
+        {% else %}
+
+        <div class="col text-center">
+            <div class="card h-100 d-inline-block">
+                <div class="card-body">
+                    <h5 class="card-title">No events</h5>
+                    <p class="card-text">You have not created any events yet.😢</p>
+                    <div class="card-footer">
+                        <a href="{% url 'mass:create' %}" class="btn btn-primary">Create event</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</div>

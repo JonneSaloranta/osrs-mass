@@ -1,32 +1,20 @@
-{% extends "website/base.html" %}
-
-{% load static %}
-{% load i18n %}
-{% load event_filters%}
-
-
-
-{% block content %}
-
 <div class="container mb-3">
-    <div class="row justify-content-center g-4">
-
-        {% if events %}
-        {% for event in events %}
-        <div class="col-md-3">
+    <div class="row justify-content-center g-4 mb-3">
+        <div class="col-md-4">
+            {% if events %}
+            {% for event in events %}
             <div class="card h-100">
                 <h3 class="card-title text-center p-3">{{ event.name|upper }}</h3>
                 <img src="{{event.get_event_image_url}}" class="card-img-top object-fill -xxl-contain border rounded" alt="Event image" />
                 <div class="card-body">
                     <p class="card-text">{{ event.description|truncatewords:15 }}</p>
-                    <p>{{event.start_date|is_in_progress:event.end_date}}</p>
                     {% if event.start_date|is_in_progress:event.end_date %}
                     <p class="card-text text-warning fw-bold"><i class="bi bi-clock-fill"></i> In Progress!</p>
                     {% else %}
                     {% if event.start_date|starts_in_10_minutes %}
                     <p class="card-text text-info fw-bold"><i class="bi bi-clock-fill"></i> Starting in &lt;10min!</p>
                     {% else %}
-                    <p class="card-text text-primary fw-bold"><i class="bi bi-clock-fill"></i> Until Starts: {{ event.start_date|timeuntil_start }}</p>
+                    <p class="card-text text-success fw-bold"><i class="bi bi-clock-fill"></i> Until Starts: {{ event.start_date|timeuntil_start }}</p>
                     {% endif %}
                     {% endif %}
 
@@ -59,12 +47,17 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
+            {% else %}
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center">No events</h5>
+                    <p class="card-text text-center">You have not created any events yet.😢</p>
+                    <a href="{% url 'mass:create' %}" class="btn btn-primary mt-auto">Create event</a>
+                </div>
+            </div>
+            {% endif %}
+
         </div>
-        {% endfor %}
-        {% else %}
-        <h1 class="card-title text-center p-3">There are no events at the moment. 😢</h1>
-        {% endif %}
     </div>
 </div>
-
-{% endblock %}
