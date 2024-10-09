@@ -9,16 +9,32 @@ from .forms import EventForm
 from .models import Event, InviteUsage
 
 
+from django.contrib.auth.models import User
+from .models import Event
+from website.models import UserNickname
+
 def index(request):
-    try:
-        all_events = Event.objects.all()
-    except OperationalError:
-        all_events = []
+    all_events = Event.objects.all().select_related('creator')  # Fetch related user with each event
+
+    # Prepare a list to store event data with nicknames
+    events_with_nicknames = []
+    for event in all_events:
+        try:
+            user_nickname = UserNickname.objects.get(user=event.creator)  # Get nickname for the creator
+        except UserNickname.DoesNotExist:
+            user_nickname = None  # If no nickname exists, set to None
+
+        events_with_nicknames.append({
+            'event': event,
+            'nickname': user_nickname.nickname if user_nickname else event.creator.username,  # Fallback to username
+        })
 
     context = {
-        'events': all_events
+        'events_with_nicknames': events_with_nicknames
     }
     return render(request, 'mass/index.html', context=context)
+
+
 
 @login_required
 def create_event(request):
